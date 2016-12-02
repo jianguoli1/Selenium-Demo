@@ -1,17 +1,12 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
-import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,12 +17,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import org.jsoup.Jsoup;
-import org.jsoup.helper.Validate;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -61,7 +53,8 @@ public class AccessDresses {
 		    	// process the lines
 		    	browserType = line;
 		    	System.out.println(browserType);
-		    }	    
+		    }	 
+		    br.close();
 		    
 		}
 		catch (Exception e ) {
