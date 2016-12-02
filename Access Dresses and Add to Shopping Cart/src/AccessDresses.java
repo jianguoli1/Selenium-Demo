@@ -293,21 +293,19 @@ public class AccessDresses {
 		//Look up dress prices in cart
      	try {
      		
+     		//capability configuration for new PhantomJSDriver
      		DesiredCapabilities caps = new DesiredCapabilities();
-     		//caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "C:\\Users\\Li\Downloads\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");
      		caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "C:\\Users\\Li\\Downloads\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");
-     		//caps.setCapability("phantomjs.binary.path", "path of phantom binary/phantomjs");
             caps.setJavascriptEnabled(true);
+            
      		WebDriver ghostDriver = new PhantomJSDriver(caps);
      		//visit url using PhantomJSDriver powered WebDriver
      		ghostDriver.get(driver.getCurrentUrl());
      		
-     		//save all price links found in cart
-     		//List<WebElement> priceLinks = ghostDriver.findElements(By.xpath("//id[contains(text(),'total_product_price')]"));
+     		//save all price links found in cart     		
      		List<WebElement> priceLinks = ghostDriver.findElements(By.className("price"));
-     		
-     		//List<WebElement> priceLinks = ghostDriver.findElements(By.cssSelector("cart-total.id"));;
-            
+     		//List<WebElement> priceLinks = ghostDriver.findElements(By.xpath("//id[contains(text(),'total_product_price')]"));
+     		//List<WebElement> priceLinks = ghostDriver.findElements(By.cssSelector("cart-total.id"));;            
           		
      		//Document doc = Jsoup.parse(ghostDriver.getPageSource());
      		
@@ -322,7 +320,6 @@ public class AccessDresses {
 	        System.out.println();
 	        // print the total number of prices found on page
 	        System.out.println("There are " + priceLinks.size() + " prices found in cart:");
-	        System.out.println();
 	        
 	        //display each dress price in console
 	        for (WebElement src : priceLinks) {
@@ -343,11 +340,11 @@ public class AccessDresses {
         }
         catch (Exception e) {
         	e.printStackTrace();
-        }
-     	
+        }    	
      	
      	
      	//check if correct dresses are in cart
+     	System.out.println();
      	System.out.print("Dress names in cart match selection? If no failure message...Success!");
      	org.junit.Assert.assertEquals(dressNamesCatalog, dressNamesCart);
      	System.out.println();
