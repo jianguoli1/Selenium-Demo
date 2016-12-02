@@ -17,7 +17,7 @@ Prerequisites:
 
 What things you need to install the software and how to install them: 
 
-	Java, Selenium Webdriver, Firefox, geckodriver, Chrome, ChromeDriver can be downloaded from their free repositories respcetively. 
+	Java, Selenium Webdriver, Jsoup, Firefox, geckodriver, Chrome, ChromeDriver can be downloaded from their free repositories respcetively. 
 	
 Steps for setting up the testing environment: 
 
@@ -26,28 +26,37 @@ Steps for setting up the testing environment:
 	Download and install Firefox and geckodriver. 
 	Download and install Chrome and ChromeDriver. 
 	Download project files and add project in Eclipse. 
-	Setup Selenium in Eclipse as the following: 
-
+	Download Selenium and Jsoup. Extract files if needed. 
+	Setup Selenium and Jsoup in Eclipse project as the following: 
 		Right-click on test project and select Properties.
 		On the Properties window, click on “Java Build Path”.
 		Click on the Libraries tab, and then click “Add External Archives...”
-		Navigate to selenium Webdriver folder. 
+		Navigate to Selenium Webdriver folder. 
 		Select and add the JAR files.	
+		Navigate to Jsoup folder. 
+		Select and add the JAR files.
+	Download PhantomJS to your system and generate executable.  
+	Add "path/to/your/phantomjs.exe" when setting up DesiredCapabilities. 
+		e.g. caps.setCapability( PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+    		"path/to/your/phantomjs.exe");
 
 Testing steps: 
 
 	1. Navigate to Dresses page. 
 	2. Add each dress to shopping cart. 
-		Check each dress price while on this page. 
+		Save each dress name on catalog. 
+		Save each dress price on catalog. 
 		Close the popup window after adding a dress. 
 	3. Navigate to shopping cart. 
-	4. Check each selected dress is in the cart. 
-	5. Check each dress has the correct price. 
-	6. Check the total price is the sum of each individual dresses. 
+	4. Save each dress name in the cart.
+	5. Save each dress price in the cart.
+	6. Check each dress name matches between catalog page and cart. 
+	7. Check each dress price matches between catalog page and cart. 
+	8. Check the total price equals the sum of each individual dress in cart. 
 
 Purpose: 
 	
-	These steps check the complete flow for a customer to select and then check out the correct items. 
+	These steps check that the complete flow for a customer to select and add the items to cart is handled correctly. 
 
 To run the test: 
 
@@ -55,7 +64,7 @@ To run the test:
 
 Built With: 
 
-	Eclipse, Selenium, JUnit. 
+	Eclipse. 
 
 Credit: 
 
@@ -63,7 +72,7 @@ Credit:
 	
 Author: 
 
-	Jianguo Li
+	Jianguo Li, MD, MS
 
 License: 
 
@@ -72,5 +81,6 @@ License:
 Acknowledgments: 
 
 	Tremendous resources online! 
+	Sadly, need to glean useful information out of this ocean. 
 	Patience from Todd. 
 	Checkups and nudges from Nicholas Grasso, the recruiter for this position. 
