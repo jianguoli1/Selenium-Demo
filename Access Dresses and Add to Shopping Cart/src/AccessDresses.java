@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
@@ -295,7 +296,7 @@ public class AccessDresses {
      		
      		//capability configuration for new PhantomJSDriver
      		DesiredCapabilities caps = new DesiredCapabilities();
-     		caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "C:\\Users\\Li\\Downloads\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");
+     		caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, Paths.get(".").toAbsolutePath().normalize().toString());
             caps.setJavascriptEnabled(true);
             
      		WebDriver ghostDriver = new PhantomJSDriver(caps);

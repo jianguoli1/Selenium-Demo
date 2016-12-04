@@ -24,17 +24,17 @@ Steps for setting up the testing environment:
 	Install Java in testing server (JRE or JDK). 
 	Install Eclipse. 
 	Download and install Firefox and geckodriver. 
+		Add path for geckodriver to system properties. 
 	Download and install Chrome and ChromeDriver. 
 	Download project files and add project in Eclipse. 
 	Download Selenium and Jsoup. Extract files if needed. 
 	Setup Selenium and Jsoup in Eclipse project as the following: 
+		Copy and paste the .jar files to project folder. 
 		Right-click on test project and select Properties.
 		On the Properties window, click on “Java Build Path”.
-		Click on the Libraries tab, and then click “Add External Archives...”
-		Navigate to Selenium Webdriver folder. 
-		Select and add the JAR files.	
-		Navigate to Jsoup folder. 
-		Select and add the JAR files.
+		Click on the Libraries tab, and then click “Add JARs”
+		Expand project folder and locate Selenium and JSoup .JAR files.  
+		Select and add the JAR files one at a time.	
 	Download PhantomJS to your system and generate executable.  
 	Add "path/to/your/phantomjs.exe" when setting up DesiredCapabilities. 
 		e.g. caps.setCapability( PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
