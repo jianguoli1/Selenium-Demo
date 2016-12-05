@@ -296,7 +296,7 @@ public class AccessDresses {
      		
      		//capability configuration for new PhantomJSDriver
      		DesiredCapabilities caps = new DesiredCapabilities();
-     		caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, Paths.get(".").toAbsolutePath().normalize().toString());
+     		caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, Paths.get("phantomjs.exe").toAbsolutePath().normalize().toString());
             caps.setJavascriptEnabled(true);
             
      		WebDriver ghostDriver = new PhantomJSDriver(caps);
@@ -346,7 +346,7 @@ public class AccessDresses {
      	
      	//check if correct dresses are in cart
      	System.out.println();
-     	System.out.print("Dress names in cart match selection? If no failure message...Success!");
+     	System.out.print("Dress names in cart match user selection? If no failure message...Success!");
      	org.junit.Assert.assertEquals(dressNamesCatalog, dressNamesCart);
      	System.out.println();
      	

@@ -12,12 +12,13 @@ Getting Started:
 
 Prerequisites: 
 
+	Firefox and Google Chrome web browsers. 
 	Firefox needs to have geckodriver installed. 
 	Chrome needs to have ChromeDriver installed. 
 
-What things you need to install the software and how to install them: 
+Things you need to install and how to install them: 
 
-	Java, Selenium Webdriver, Jsoup, Firefox, geckodriver, Chrome, ChromeDriver can be downloaded from their free repositories respcetively. 
+	Java, Selenium Webdriver, Jsoup, PhantomJS, Firefox, geckodriver, Chrome, ChromeDriver can be downloaded from their free repositories respectively. 
 	
 Steps for setting up the testing environment: 
 
@@ -80,7 +81,6 @@ License:
 
 Acknowledgments: 
 
-	Tremendous resources online! 
-	Sadly, need to glean useful information out of this ocean. 
-	Patience from Todd. 
+	Tremendous resources online!...But need to glean useful information out of this ocean. 
+	Patience from Todd and his team. 
 	Checkups and nudges from Nicholas Grasso, the recruiter for this position. 
