@@ -1,25 +1,19 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.math.BigDecimal;
-import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriverService;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Wait;
 
 import org.jsoup.Jsoup;
@@ -33,7 +27,6 @@ public class AccessDresses {
     static Wait<WebDriver> wait;
     static String url;
     static String browserType;
-
 
 	public static void main(String[] args) throws InterruptedException  {
 		
@@ -51,7 +44,7 @@ public class AccessDresses {
 		    	System.out.println(url);
 		    }
 		    
-		    ////read the browser to use
+		    //read the browser type to use
 		    if ((line = br.readLine()) != null) {
 		    	// process the lines
 		    	browserType = line;
@@ -81,10 +74,10 @@ public class AccessDresses {
 		
 		//load initial url
         driver.get(url);
-        // Maximize window
+        //maximize window
         driver.manage().window().maximize();
         
-        // Sleep for 5 seconds for page to load
+        //sleep for 5 seconds for page to load
      	Thread.sleep(5000);
         
      	//find all clothing links
@@ -99,7 +92,7 @@ public class AccessDresses {
 		//iterator through all links
 		Iterator<WebElement> iter = Links.iterator();
  
-		//this will check whether list has some element or not
+		//check which is the DRESSES link
 		int i = 0;
 		while (iter.hasNext()) {
  
@@ -136,11 +129,11 @@ public class AccessDresses {
 		ArrayList <String> dressNamesCatalog= new ArrayList <String>();
      	//Look up dress names on page
      	try {
+     		//Starts Jsoup to read the page
      		Document doc = Jsoup.connect(driver.getCurrentUrl()).get();
 			//select dress names found on page
 	        Elements dressLinks = doc.getElementsByAttributeValueEnding("alt", "Dress");
 	        System.out.println("There are " +  dressLinks.size() + " dress names in catalog:");
-
 	        
 	        //display each dress name in console
 	        for (Element src : dressLinks) {
@@ -155,36 +148,26 @@ public class AccessDresses {
         }
 		
      	
-     	//temporary place to keep dress prices from catalog (has duplicates)
-     	ArrayList <BigDecimal> dressPricesTemp= new ArrayList <BigDecimal>();
-     	//place to keep dress prices from catalog (to remove duplicates)
+     	//keep dress prices from catalog in an ArrayList
      	ArrayList <BigDecimal> dressPricesCatalog= new ArrayList <BigDecimal>();
      	try {
-     		Document doc = Jsoup.connect(driver.getCurrentUrl()).get();
-     		//Find all prices for clothing type on new page
-	        Elements priceLinks = doc.getElementsByAttributeValue("itemprop", "price");
-	        System.out.println();
+     		//Find all prices for clothing type on catalog page
+     		List <WebElement> pricesCatalog = driver.findElements(By.xpath("//div[@class='left-block']//span[@class = 'price product-price']"));
+     		System.out.println();
+     		System.out.println("There are " + pricesCatalog.size() + " prices found in catalog for DRESSES:");
 	        
-	      //add each dress price found to ArrayList
-	        for (Element src : priceLinks) {
-	        	String price = src.text();
-	         	dressPricesTemp.add(new BigDecimal(price.replace("$", "")));
+	        
+	        //add each dress price found to ArrayList
+	        for (WebElement src : pricesCatalog) {
+	        	String price = src.getAttribute("innerHTML").trim();
+	        	//display each dress price in console
+	        	System.out.println( "\t" + price);
+	         	dressPricesCatalog.add(new BigDecimal(price.replace("$", "")));
 	        }
         }
         catch (Exception e) {
         	e.printStackTrace();
         }
-     	//weed out duplicates to have one copy of each value
-     	dressPricesCatalog = (ArrayList<BigDecimal>) dressPricesTemp.stream().distinct().collect(Collectors.toList());
-        // print the total number of prices found on page
-        System.out.println("There are " + dressPricesCatalog.size() + " prices found in catalog for DRESSES:");
-
-        //display each dress price in console
-        for (BigDecimal price : dressPricesCatalog) {
-         	//display each new dress price in console
-         	System.out.println( "\t" + "$" + price);
-        }
-    
 		
      	//select dresses available for check out
 		List<WebElement> dressSelect = driver.findElements(By.xpath("//span[contains(text(),'Add to cart')]"));		
@@ -193,12 +176,12 @@ public class AccessDresses {
 		System.out.println();
 		
 				
-		// Store the parent window
+		//store the parent window
 		String parentWindowHandler = driver.getWindowHandle(); 
-		//Define a popup window
+		//define a popup window
 		String subWindowHandler = null;				
 		
-		
+		//note this takes a while
 		System.out.println("Adding items to shopping cart...please wait.");
 		System.out.println();
 		
@@ -209,8 +192,9 @@ public class AccessDresses {
 			// pick an item
 			WebElement item = iterDresses.next();
 						
-			//click to add item to cart
+			//must execute Javascript to click hidden element
 			JavascriptExecutor js = (JavascriptExecutor)driver;
+			//click to add item to cart
 			js.executeScript("arguments[0].click();", item);			
 			
 			
@@ -247,14 +231,13 @@ public class AccessDresses {
 		js.executeScript("arguments[0].click();", shoppingCart);        
 		
 		//display current url for browser
-		System.out.println("Current URL is: " + driver.getCurrentUrl());
-		
+		System.out.println("Current URL is: " + driver.getCurrentUrl());		
 		
 		//place to keep dress names from cart
 		ArrayList <String> dressNamesCart= new ArrayList <String>();
 		//look up items in cart
 		try {
-			//read in cart content
+			//read in Shopping Cart Summary page
 			Document doc = Jsoup.connect(driver.getCurrentUrl()).get();
 			//select cart items
 			Elements cartItems = doc.getElementsByAttributeValueEnding("alt", "Dress");
@@ -271,7 +254,7 @@ public class AccessDresses {
 				dressNamesCart.add(item.attr("alt"));
 				//display each new dress name in console
 				System.out.println( "\t"+ dressNamesCart.get(dressNamesCart.size()-1));
-
+				
 			}
 		}
 		
@@ -291,37 +274,36 @@ public class AccessDresses {
      		System.out.println("Current URL is: " + driver.getCurrentUrl());
      		
      		//locate unit price for each dress in cart
-     		List <WebElement> priceList = driver.findElements(By.xpath("//table[@id='cart_summary']//td[@class='cart_unit']//span[1]//span[1]"));
+     		List <WebElement> pricesCart = driver.findElements(By.xpath("//table[@id='cart_summary']//td[@class='cart_unit']//span[1]//span[1]"));
      		//display the total number of prices found in cart
      		System.out.println();
-     		System.out.println("Found " + priceList.size() + " prices in cart:");
+     		System.out.println("Found " + pricesCart.size() + " prices in cart:");
      		
-     		Iterator<WebElement> priceIterator = priceList.iterator();
+     		Iterator<WebElement> priceIterator = pricesCart.iterator();
      		//display each unit price found in cart
     		while (priceIterator.hasNext()) {
      
     			//going through price item one at a time
-    			WebElement price = priceIterator.next();	
-    			
+    			WebElement priceCart = priceIterator.next();	    			
     			
     			//get the text
-    			String priceLabel = price.getText();
-    			//save unit price to list
-    			
-    			dressPricesCart.add(new BigDecimal(priceLabel.replace("$", "")));
+    			String priceLabel = priceCart.getText();
     			
     			//display unit price
     			System.out.println("\t" + priceLabel);
+    			
+    			//save unit price to list    			
+    			dressPricesCart.add(new BigDecimal(priceLabel.replace("$", "")));    			   			
     			
     		}  	        	        
         
 	        //locate and save total price in cart"
 	        WebElement totalPriceLink = driver.findElement(By.xpath("//table[@id='cart_summary']//td[@id='total_product']"));
+	        //convert to BigDecimal for calculation
      		totalPrice = new BigDecimal(totalPriceLink.getText().replace("$",""));
 	        System.out.println();
 	        // print the total price found in cart
-	        System.out.println("Total price is $" + totalPrice + " as found in cart.");
-	        
+	        System.out.println("Total price is $" + totalPrice + " as found in cart.");	        
 	        
         }
         catch (Exception e) {

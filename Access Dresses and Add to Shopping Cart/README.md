@@ -18,7 +18,7 @@ Prerequisites:
 
 Things you need to install and how to install them: 
 
-	Java, Selenium Webdriver, Jsoup, PhantomJS, Firefox, geckodriver, Chrome, ChromeDriver can be downloaded from their free repositories respectively. 
+	Java, Selenium Webdriver, Jsoup, Firefox, geckodriver, Chrome, ChromeDriver can be downloaded from their free repositories respectively. 
 	
 Steps for setting up the testing environment: 
 
@@ -29,18 +29,14 @@ Steps for setting up the testing environment:
 	Download and install Chrome and ChromeDriver. 
 	Download project files and add project in Eclipse. 
 	Download Selenium and Jsoup. Extract files if needed. 
-	Setup Selenium and Jsoup in Eclipse project as the following: 
+	Setup Selenium and Jsoup files in Eclipse project as the following: 
 		Copy and paste the .jar files to project folder. 
 		Right-click on test project and select Properties.
 		On the Properties window, click on “Java Build Path”.
-		Click on the Libraries tab, and then click “Add JARs”
-		Expand project folder and locate Selenium and JSoup .JAR files.  
-		Select and add the JAR files one at a time.	
-	Download PhantomJS to your system and generate executable.  
-	Add "path/to/your/phantomjs.exe" when setting up DesiredCapabilities. 
-		e.g. caps.setCapability( PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-    		"path/to/your/phantomjs.exe");
-
+		Click on the Libraries tab, and then click “Add JARs”. 
+		Expand project folder and locate Selenium JAR file and Jsoup JAR file.  
+		Select and add the JAR files, one at a time.	
+	
 Testing steps: 
 
 	1. Navigate to Dresses page. 
@@ -73,11 +69,11 @@ Credit:
 	
 Author: 
 
-	Jianguo Li, MD, MS
+	Jianguo Li, MD MS
 
 License: 
 
-	This project can be used for academic purpose at no cost where proper reference of the original work is provided. Free use is limited to non-commercial purpose only, however. 
+	This project can be used for academic purpose at no cost where proper reference to the original work is provided. Free use is limited to non-commercial purpose only, however. 
 
 Acknowledgments: 
 
