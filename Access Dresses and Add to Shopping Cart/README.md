@@ -14,7 +14,7 @@ Prerequisites:
 
 	Firefox and Google Chrome web browsers. 
 	Firefox needs to have geckodriver installed. 
-	Chrome needs to have chromeDriver installed. 
+	Chrome needs to have ChromeDriver installed. 
 
 Things you need to install and how to install them: 
 
@@ -27,7 +27,7 @@ Steps for setting up the testing environment:
 	Download and install Firefox and geckodriver. 
 		Add path for geckodriver to config.properties, e.g. /home/plex/usr/geckodriver in unix. 
 	Download and install Chrome and ChromeDriver. 
-		Add path for chromedriver to config.properties, e.g. /home/plex/usr/chromedriver in unix. 
+		Add path for ChromeDriver to config.properties, e.g. /home/plex/usr/chromedriver in unix. 
 	Download project files and add project in Eclipse. 
 	Download Selenium and Jsoup. Extract files if needed. 
 	Setup Selenium and Jsoup files in Eclipse project as the following: 
@@ -39,7 +39,7 @@ Steps for setting up the testing environment:
 		Select and add the JAR files, one at a time.	
 
 Config file: 
-	URL, browser type, geckodriver or chromedriver location are specified in the config.properties file. browser type and driver locations must be a matching set. For example:
+	URL, browser type, geckodriver or ChromeDriver location are specified in the config.properties file. browser type and driver locations must be a matching set. For example:
 http://automationpractice.com/ 
 Chrome
 /home/plex/usr/chromedriver	 
