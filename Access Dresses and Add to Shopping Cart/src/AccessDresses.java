@@ -126,7 +126,7 @@ public class AccessDresses {
      	Thread.sleep(5000);
 		
      	//place to keep dress names from catalog
-		ArrayList <String> dressNamesCatalog= new ArrayList <String>();
+		ArrayList <String> dressNamesCatalog= new ArrayList <String>();		
      	//Look up dress names on page
      	try {
      		//Starts Jsoup to read the page
@@ -172,6 +172,7 @@ public class AccessDresses {
      	//select dresses available for check out
 		List<WebElement> dressSelect = driver.findElements(By.xpath("//span[contains(text(),'Add to cart')]"));		
 		System.out.println();
+		//display number of dresses available for checkout
 		System.out.println("Found " +  dressSelect.size() + " dresses ready for checkout.");	
 		System.out.println();
 		
@@ -181,7 +182,7 @@ public class AccessDresses {
 		//define a popup window
 		String subWindowHandler = null;				
 		
-		//note this takes a while
+		//note this could take a minute
 		System.out.println("Adding items to shopping cart...please wait.");
 		System.out.println();
 		
@@ -189,7 +190,7 @@ public class AccessDresses {
 		Iterator<WebElement> iterDresses = dressSelect.iterator();		
 		while (iterDresses.hasNext()) {
  
-			// pick an item
+			//pick up one item at a time
 			WebElement item = iterDresses.next();
 						
 			//must execute Javascript to click hidden element
@@ -235,7 +236,7 @@ public class AccessDresses {
 		
 		//place to keep dress names from cart
 		ArrayList <String> dressNamesCart= new ArrayList <String>();
-		//look up items in cart
+		//look up item names in cart
 		try {
 			//read in Shopping Cart Summary page
 			Document doc = Jsoup.connect(driver.getCurrentUrl()).get();
@@ -250,10 +251,12 @@ public class AccessDresses {
 					 
 				//select an item
 				Element item = iterCI.next();
-				//add each dress name to ArrayList
-				dressNamesCart.add(item.attr("alt"));
+				//save dress name
+				String cartName = item.attr("alt");
 				//display each new dress name in console
-				System.out.println( "\t"+ dressNamesCart.get(dressNamesCart.size()-1));
+				System.out.println( "\t"+ cartName);
+				//add each dress name to ArrayList
+				dressNamesCart.add(cartName);
 				
 			}
 		}
@@ -297,12 +300,12 @@ public class AccessDresses {
     			
     		}  	        	        
         
-	        //locate and save total price in cart"
+	        //locate and save total price in cart
 	        WebElement totalPriceLink = driver.findElement(By.xpath("//table[@id='cart_summary']//td[@id='total_product']"));
 	        //convert to BigDecimal for calculation
      		totalPrice = new BigDecimal(totalPriceLink.getText().replace("$",""));
 	        System.out.println();
-	        // print the total price found in cart
+	        //print the total price found in cart
 	        System.out.println("Total price is $" + totalPrice + " as found in cart.");	        
 	        
         }
